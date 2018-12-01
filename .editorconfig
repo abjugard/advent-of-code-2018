@@ -1,0 +1,12 @@
+root = true
+
+[*]
+end_of_line = lf
+
+[*.py]
+insert_final_newline = true
+
+[*.{py,json}]
+charset = utf-8
+indent_style = space
+indent_size = 2
