@@ -1,0 +1,52 @@
+{
+    "build_systems":
+    [
+        {
+            "env":
+            {
+                "PYTHONIOENCODING": "utf8"
+            },
+            "file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)",
+            "name": "Python 3",
+            "selector": "source.python",
+            "shell_cmd": "python3 -OO -u \"$file\"",
+            "windows":
+            {
+                "shell_cmd": "python3 -OO -u \"$file\""
+            }
+        },
+        {
+            "env":
+            {
+                "PYTHONIOENCODING": "utf8"
+            },
+            "file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)",
+            "name": "PyPy 3",
+            "selector": "source.python",
+            "shell_cmd": "pypy3 -OO -u \"$file\"",
+            "windows":
+            {
+                "shell_cmd": "pypy3 -OO -u \"$file\""
+            }
+        }
+    ],
+    "folders":
+    [
+        {
+            "file_exclude_patterns":
+            [
+                "*.pyc"
+            ],
+            "folder_exclude_patterns":
+            [
+                "__pycache__"
+            ],
+            "name": "Source code",
+            "path": "src"
+        },
+        {
+            "name": "Puzzle data",
+            "path": "data"
+        }
+    ]
+}
