@@ -24,7 +24,7 @@ def format_line(line: str, ops: list):
     elif op == 'func':
       line = args(line)
     elif op == 'map':
-      line = map(args, line)
+      line = list(map(args, line))
     elif op == 'replace':
       line = re.sub(args[0], args[1], line)
     elif op == 'split':
