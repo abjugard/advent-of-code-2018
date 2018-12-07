@@ -1,8 +1,7 @@
-from santas_little_helpers import day, get_data, timed
+from santas_little_helpers import day, get_data, timed, alphabet
 
 today = day(2018, 5)
 
-alphabet = 'abcdefghijklmnopqrstuvwxyz'
 pairs = [c + c.upper() for c in alphabet]
 pairs += [c.upper() + c for c in alphabet]
 

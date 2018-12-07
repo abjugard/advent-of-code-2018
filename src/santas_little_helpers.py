@@ -6,6 +6,8 @@ from requests import request
 from requests import codes as status_codes
 from typing import Callable, Iterator
 
+alphabet = 'abcdefghijklmnopqrstuvwxyz'
+
 base_ops = [('replace', (r'\n', ''))]
 
 aoc_root = Path('../')
