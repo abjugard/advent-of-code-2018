@@ -52,10 +52,10 @@ def find_consistently_lazy_guard(minutes_sleeping):
 def fmt(entry):
   global guardid
   m = r.match(entry)
-  event = m.group('event')
-  if m.group('guardid') is not None:
-    guardid = m.group('guardid')
-  return int(guardid), event, int(m.group('minute'))
+  event = m['event']
+  if m['guardid'] is not None:
+    guardid = m['guardid']
+  return int(guardid), event, int(m['minute'])
 
 def main() -> None:
   log_entries = [fmt(entry) for entry in sorted(list(get_data(today)))]
