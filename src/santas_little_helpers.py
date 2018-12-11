@@ -84,20 +84,20 @@ def submit_answer(today: date, answer: str, level: int = 1) -> None:
     print(content.text)
 
 def time_fmt(delta: float) -> (float, str):
-  if delta > 1e9:
-    return 1e9, 'seconds'
-  elif delta > 1e6:
-    return 1e6, 'ms'
-  elif delta > 1e3:
-    return 1e3, 'µs'
-  return 1, 'ns'
+  if delta < 1e-6:
+    return 1e9, 'ns'
+  elif delta < 1e-3:
+    return 1e6, 'µs'
+  elif delta < 1:
+    return 1e3, 'ms'
+  return 1, 'seconds'
 
 def timed(func: Callable) -> None:
-  start = time.time_ns()
+  start = time.time()
   func()
-  delta = time.time_ns()-start
+  delta = time.time()-start
   multiplier, unit = time_fmt(delta)
-  print(f'--- {delta/multiplier:.2f} {unit} ---')
+  print(f'--- {delta*multiplier:.2f} {unit} ---')
 
 def run_all():
   for file in sorted(Path('.').glob('day*-*.py')):
