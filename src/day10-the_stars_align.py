@@ -36,16 +36,16 @@ def tesseract_parse(points):
   xmax, xmin = max(p[0] for p in points), min(p[0] for p in points)
 
   pixel_size = 10
-  dimensions = ((xmax-xmin+3) * pixel_size, (ymax-ymin+3) * pixel_size)
+  dimensions = ((xmax-xmin+5) * pixel_size, (ymax-ymin+5) * pixel_size)
   img = Image.new('RGBA', dimensions, (255, 255, 255, 0))
   draw = ImageDraw.Draw(img)
   for x, y in product(range(xmin, xmax+1), range(ymin, ymax+1)):
-    yp = (y-ymin+1) * pixel_size
-    xp = (x-xmin+1) * pixel_size
+    yp = (y-ymin+2) * pixel_size
+    xp = (x-xmin+2) * pixel_size
     if (x, y) in points:
-      draw.rectangle(((xp, yp), (xp + pixel_size, yp + pixel_size)), fill='black')
+      draw.ellipse(((xp, yp), (xp + pixel_size + 7, yp + pixel_size + 7)), fill='black')
   result = pytesseract.image_to_string(img, config=f'--psm 6 -c tessedit_char_whitelist={alphabet.upper()}')
-  return result.replace('“', 'Z') # for some reason tesseract sees my Z as a “ character.
+  return result
 
 def fmt(line):
   return (int(line[10:16]), int(line[18:24])), (int(line[-8:-6]), int(line[-5:-2]))
