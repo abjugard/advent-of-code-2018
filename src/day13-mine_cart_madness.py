@@ -62,7 +62,7 @@ class Cart(object):
   position = property(_get_position)
 
 def simulate(carts):
-  while True:
+  while len(carts) > 1:
     to_del = []
     carts = sorted(carts)
     for i, cart in enumerate(carts):
@@ -77,9 +77,7 @@ def simulate(carts):
     for i in sorted(to_del, reverse=True):
       yield carts[i]
       del carts[i]
-    if len(carts) == 1:
-      yield carts[0]
-      break
+  yield carts[0]
 
 def setup_carts(track):
   carts = []
