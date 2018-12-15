@@ -1,4 +1,4 @@
-import json, re, time, importlib, sys
+import json, re, time, importlib, sys, os
 from bs4 import BeautifulSoup
 from datetime import date, datetime
 from pathlib import Path
@@ -92,12 +92,46 @@ def time_fmt(delta: float) -> (float, str):
     return 1e3, 'ms'
   return 1, 'seconds'
 
-def timed(func: Callable) -> None:
+def execute(func: Callable) -> float:
   start = time.time()
   func()
-  delta = time.time()-start
+  return time.time()-start
+
+def execute_multiple(func: Callable, times: int) -> [float]:
+  deltas = [execute(func)]
+  disable_stdout()
+  for _ in range(times-1):
+    deltas += [execute(func)]
+  enable_stdout()
+  return deltas
+
+def timed(func: Callable) -> None:
+  delta = execute(func)
+  print_result(delta)
+
+def disable_stdout() -> None:
+  sys.stdout = open(os.devnull, 'w')
+
+def enable_stdout() -> None:
+  sys.stdout = sys.__stdout__
+
+def bench(func: Callable, times: int = 100):
+  deltas = execute_multiple(func, times)
+  print_result(min(deltas), 'min')
+  avg = sum(deltas) / len(deltas)
+  print_result(avg, 'avg')
+
+def average(func: Callable, times: int = 100):
+  deltas = execute_multiple(func, times)
+  avg = sum(deltas) / len(deltas)
+  print_result(avg, 'avg')
+
+def print_result(delta: [float], prefix: str = ''):
   multiplier, unit = time_fmt(delta)
-  print(f'--- {delta*multiplier:.2f} {unit} ---')
+  divider = ''
+  if prefix is not '':
+    divider = ': '
+  print(f'--- {prefix}{divider}{delta*multiplier:.2f} {unit} ---')
 
 def run_all():
   for file in sorted(Path('.').glob('day*-*.py')):
