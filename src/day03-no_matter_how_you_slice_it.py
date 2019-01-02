@@ -1,6 +1,6 @@
 from santas_little_helpers import day, get_data, timed
 from collections import defaultdict
-from itertools import permutations, product
+from itertools import product
 import re
 
 today = day(2018, 3)

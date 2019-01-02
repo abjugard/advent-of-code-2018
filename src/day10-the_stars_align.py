@@ -1,5 +1,4 @@
-from santas_little_helpers import day, get_data, timed, alphabet
-from itertools import product
+from santas_little_helpers import day, get_data, timed
 from importlib import import_module
 from operator import attrgetter as attr
 
