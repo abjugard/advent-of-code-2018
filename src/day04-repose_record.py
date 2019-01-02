@@ -1,5 +1,4 @@
 from santas_little_helpers import day, get_data, timed
-from datetime import datetime
 from collections import defaultdict
 import re
 

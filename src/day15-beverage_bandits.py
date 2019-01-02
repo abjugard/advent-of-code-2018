@@ -1,6 +1,5 @@
 from santas_little_helpers import day, get_data, timed
 from collections import deque
-from pprint import pprint
 
 today = day(2018, 15)
 
