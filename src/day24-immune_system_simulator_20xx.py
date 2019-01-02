@@ -56,13 +56,13 @@ class Squad(object):
 
   def attack(self, other, simulate = False):
     if self.dmgtype in other.immunities:
-      return 0, 0
+      return 0
     dmg = self.effective_power
     if self.dmgtype in other.weaknesses:
       dmg *= 2
     if not simulate:
       other.take_damage(dmg)
-    return dmg, (dmg // other.hp)
+    return dmg
 
   def take_damage(self, dmg):
     units_lost = dmg // self.hp
@@ -87,10 +87,9 @@ def run():
       for attacker in sorted(teams[team], reverse=True):
         if attacker.units == 0:
           continue
-        targets = sorted([(attacker.attack(enemy, simulate=True)[0], enemy, attacker.attack(enemy, simulate=True)[1]) for enemy in enemies if enemy not in fights.values() and enemy.units > 0], reverse=True)
+        targets = sorted([(attacker.attack(enemy, simulate=True), enemy) for enemy in enemies if enemy not in fights.values() and enemy.units > 0], reverse=True)
         if len(targets) > 0 and targets[0][0] > 0:
-          # if targets[0][2] > 0:
-            fights[attacker] = targets[0][1]
+          fights[attacker] = targets[0][1]
     for attacker in sorted(fights.keys(), key=attr('initiative'), reverse=True):
       if attacker.units > 0:
         attacker.attack(fights[attacker])
