@@ -29,9 +29,9 @@ def find_unique_claim(m, all_claimers):
 
 def fun(line):
   m = r.match(line)
-  claimer = m['claimer']
-  coords = int(m['x']), int(m['y'])
-  area = int(m['w']), int(m['h'])
+  claimer = m.group('claimer')
+  coords = int(m.group('x')), int(m.group('y'))
+  area = int(m.group('w')), int(m.group('h'))
   return claimer, coords, area
 
 def main() -> None:
