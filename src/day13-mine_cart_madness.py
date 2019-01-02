@@ -22,6 +22,10 @@ class Cart(object):
     self.next_turn = next_turn
     self.track = track
 
+  @property
+  def position(self):
+    return self.y, self.x
+
   def copy(self):
     return Cart(self.y, self.x, self.direction, self.next_turn, self.track)
 
@@ -29,14 +33,11 @@ class Cart(object):
     self.track = track
 
   def travel(self):
-    if self.direction == '>':
-      self.x += 1
-    elif self.direction == '^':
-      self.y -= 1
-    elif self.direction == '<':
-      self.x -= 1
-    elif self.direction == 'v':
-      self.y += 1
+    if self.direction == '>':   self.x += 1
+    elif self.direction == '^': self.y -= 1
+    elif self.direction == '<': self.x -= 1
+    elif self.direction == 'v': self.y += 1
+
     track_part = self.track[self.y][self.x]
     if track_part in _bends:
       self.direction = _bends[track_part][self.direction]
@@ -48,9 +49,6 @@ class Cart(object):
 
   def __lt__(self, other):
     return self.position < other.position
-
-  def _get_position(self):
-    return self.y, self.x
   
   def _turn(self):
     if self.next_turn == 'straight':
@@ -58,8 +56,6 @@ class Cart(object):
     else:
       self.direction = _turns[self.next_turn][self.direction]
       self.next_turn = 'left' if self.next_turn == 'right' else 'straight'
-
-  position = property(_get_position)
 
 def simulate(carts):
   while len(carts) > 1:
