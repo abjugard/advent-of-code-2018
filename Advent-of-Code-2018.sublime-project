@@ -7,12 +7,12 @@
                 "PYTHONIOENCODING": "utf8"
             },
             "file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)",
-            "name": "Python 3",
+            "name": "PyPy 3",
             "selector": "source.python",
-            "shell_cmd": "python3 -OO -u \"$file\"",
+            "shell_cmd": "pypy3 -OO -u \"$file\"",
             "windows":
             {
-                "shell_cmd": "python3 -OO -u \"$file\""
+                "shell_cmd": "pypy3 -OO -u \"$file\""
             }
         },
         {
@@ -21,12 +21,12 @@
                 "PYTHONIOENCODING": "utf8"
             },
             "file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)",
-            "name": "PyPy 3",
+            "name": "Python 3",
             "selector": "source.python",
-            "shell_cmd": "pypy3 -OO -u \"$file\"",
+            "shell_cmd": "python3 -OO -u \"$file\"",
             "windows":
             {
-                "shell_cmd": "pypy3 -OO -u \"$file\""
+                "shell_cmd": "python3 -OO -u \"$file\""
             }
         }
     ],
