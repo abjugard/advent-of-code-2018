@@ -47,6 +47,10 @@
         {
             "name": "Puzzle data",
             "path": "data"
+        },
+        {
+            "name": "Misc",
+            "path": "misc"
         }
     ]
 }
