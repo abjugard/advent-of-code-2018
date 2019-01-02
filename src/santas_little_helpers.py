@@ -44,8 +44,6 @@ def asmbunny_setup(instrs: {}, line: str) -> (Callable, tuple):
     except:
       pass
     args += arg,
-  if len(args) == 1:
-    args = args[0]
   return instrs[instr], args
 
 def get_data(today: date = date.today(), ops: list = base_ops) -> Iterator:
